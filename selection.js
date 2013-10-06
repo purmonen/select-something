@@ -6,6 +6,7 @@ app.controller('SelectionCtrl', function($scope, $timeout) {
 	$scope.element = '';
 	$scope.selectionSize = 0;
 	$scope.showNoSelection = true;
+	var allowSelect = true;
 
 	$scope.addElement = function() {
 		var element = $scope.element.trim();
@@ -45,10 +46,12 @@ app.controller('SelectionCtrl', function($scope, $timeout) {
 	}
 
 	$scope.selectElements = function() {
-		$scope.showNoSelection = false;
-		$scope.selected = [];
-
-		select([]);
+		if (allowSelect) {
+			allowSelect = false;
+			$scope.showNoSelection = false;
+			$scope.selected = [];
+			select([]);
+		}
 	}
 
 	function select(indexes) {
@@ -73,6 +76,7 @@ app.controller('SelectionCtrl', function($scope, $timeout) {
 				for (i = 0; i < indexes.length; i++) {
 					$scope.selected.push($scope.elements[indexes[i]]);
 				}
+				allowSelect = true;
 			}, timeout);
 		}
 	}
