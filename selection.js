@@ -5,6 +5,7 @@ app.controller('SelectionCtrl', function($scope, $timeout) {
 	$scope.selected = [];
 	$scope.element = '';
 	$scope.selectionSize = 0;
+	$scope.showNoSelection = true;
 
 	$scope.addElement = function() {
 		var element = $scope.element.trim();
@@ -31,31 +32,20 @@ app.controller('SelectionCtrl', function($scope, $timeout) {
 
 	$scope.removeSelected = function(index) {
 		$scope.selected.splice(index, 1);
+
+		if (!$scope.selected.length) {
+			$scope.showNoSelection = true;
+		}
 	}
 
 	$scope.removeElements = function() {
 		$scope.elements = [];
 		$scope.selected = [];
+		$scope.showNoSelection = true;
 	}
 
-	/*
 	$scope.selectElements = function() {
-		var i;
-		var random;
-		$scope.selected = [];
-
-		var selected = [];
-		while (selected.length < $scope.selectionSize) {
-			random = randomRange(0, $scope.elements.length-1);
-			if (selected.indexOf(random) === -1) {
-				selected.push(random);
-				$scope.selected.push($scope.elements[random]);
-			}
-		}
-	}
-	*/
-
-	$scope.selectElements = function() {
+		$scope.showNoSelection = false;
 		$scope.selected = [];
 
 		select([]);

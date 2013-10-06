@@ -5,7 +5,6 @@
 	<meta name="viewport" content="width=device-width, initial-scale=1.0">
 	<title>Select</title>
 	<link rel="stylesheet" href="http://netdna.bootstrapcdn.com/bootstrap/3.0.0/css/bootstrap.min.css">
-	<link rel="stylesheet" href="style.css">
 	<script src="http://code.jquery.com/jquery-1.10.2.min.js"></script>
     <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.0.8/angular.min.js"></script>
 	<script src="selection.js"></script>
@@ -72,7 +71,7 @@
 					<span>{{ element }}</span>
 					<button role="button" class="close" ng-click="removeSelected(i)">&times;</button>
 				</li>
-				<li class="list-group-item" ng-hide="elements.length">No elements</li>
+				<li class="list-group-item" ng-show="showNoSelection">No elements</li>
 			</ul>
 		</div>	
 	</div>
