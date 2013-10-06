@@ -19,15 +19,10 @@ app.controller('SelectionCtrl', function($scope, $timeout) {
 		if ($scope.elements.length === 1) {
 			$scope.selectionSize = 1;
 		}
-
-		$('#selection-size-slider').slider({
-			range: 'min',
-			min: 1,
-			max: $scope.elements.length
-		});
 	};
 
 	$scope.removeElement = function(index) {
+		$scope.selectionSize = 1;
 		$scope.elements.splice(index, 1);
 	}
 
@@ -87,11 +82,8 @@ app.controller('SelectionCtrl', function($scope, $timeout) {
 	}
 });
 
-app.filter('range', function() {
-	return function(input, total) {
-		for (var i = 0; i < array.length; i++) {
-			input.push(array[i]);
-		}
-		return input;
+app.filter('addOne', function() {
+	return function(input) {
+		return parseInt(input) + 1;
 	};
 });
