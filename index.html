@@ -5,6 +5,7 @@
 	<meta name="viewport" content="width=device-width, initial-scale=1.0">
 	<title>Select</title>
 	<link rel="stylesheet" href="http://netdna.bootstrapcdn.com/bootstrap/3.0.0/css/bootstrap.min.css">
+	<link rel="stylesheet" href="style.css">
 	<script src="http://code.jquery.com/jquery-1.10.2.min.js"></script>
     <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.0.8/angular.min.js"></script>
 	<script src="selection.js"></script>
@@ -27,7 +28,7 @@
 	<div class="col-md-6 col-sm-6 col-lg-6">
 		<form role="form" class="form-inline">
 			<div class="form-group">
-				<input ng-model="element" class="form-control" autofocus>			
+				<input ng-model="element" class="form-control" ng-focus="{{ focus }}">			
 			</div>
 			<button id="add-element-button" type="submit" class="btn btn-default"
 				ng-click="addElement()">
