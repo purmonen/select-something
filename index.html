@@ -1,0 +1,83 @@
+<!doctype html>
+<html>
+<head>
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<title>Select</title>
+	<link rel="stylesheet" href="http://netdna.bootstrapcdn.com/bootstrap/3.0.0/css/bootstrap.min.css">
+	<link rel="stylesheet" href="style.css">
+	<script src="http://code.jquery.com/jquery-1.10.2.min.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.0.8/angular.min.js"></script>
+	<script src="selection.js"></script>
+</head>
+<body ng-controller="SelectionCtrl" ng-app="app">
+<div class="container">
+	<ol class="breadcrumb">
+		<li><a href="http://www.kth.se">KTH</a></li>
+		<li><a href="http://www.nada.kth.se/~purmonen/">Sami Purmonen</a></li>
+		<li class="active">Select</li>
+	</ol>
+	<div class="page-header">
+		<h1>Select <small>something from something</small></h1>
+	</div>
+
+<div class="row">
+	<div class="col-md-6 col-sm-6 col-lg-6">
+		<form role="form" class="form-inline">
+			<div class="form-group">
+				<input ng-model="element" class="form-control" autofocus>			
+			</div>
+			<button id="add-element-button" type="submit" class="btn btn-default"
+				ng-click="addElement()">
+				<span class="glyphicon glyphicon-plus"></span> Add</button>
+			<button ng-click="removeElements()" class="btn btn-danger">
+				<span class="glyphicon glyphicon-minus"></span> Clear</button>
+		</form>
+	</div>
+
+	<div class="col-md-6 col-sm-6 col-lg-6" ng-show="elements.length">
+		<form role="form" class="form-inline">
+			<div class="form-group">
+				<select ng-model="selectionSize" class="form-control">
+					<option ng-repeat="(i, name) in elements">
+						{{ i+1 }} 
+					</option>
+				</select>
+			</div>
+			<button ng-click="selectElements()" class="btn btn-primary">
+				<span class="glyphicon glyphicon-play"></span> Select</button>
+		</form>
+	</div>
+</div>
+<br>
+<div class="row">
+	<div class="col-md-6 col-sm-6 col-lg-6">
+		<div class="panel panel-default">
+			<div class="panel-heading">Select from</div>
+			<ul class="list-group" id="select-from">
+				<li class="list-group-item" ng-repeat="(i, element) in elements">
+					<span>{{ element }}</span>
+					<button role="button" class="close" ng-click="removeElement(i)">&times;</button>
+				</li>
+				<li class="list-group-item" ng-hide="elements.length">No elements</li>
+			</ul>
+		</div>
+	</div>
+
+	<div class="col-md-6 col-sm-6 col-lg-6">
+		<div class="panel panel-success">
+			<div class="panel-heading">Selected</div>
+			<ul class="list-group">
+				<li class="element-div list-group-item" ng-repeat="element in selected">
+					<span>{{ element }}</span>
+					<button role="button" class="close" ng-click="removeSelected(i)">&times;</button>
+				</li>
+				<li class="list-group-item" ng-hide="elements.length">No elements</li>
+			</ul>
+		</div>	
+	</div>
+
+</div>
+</div>
+</body>
+</html>
