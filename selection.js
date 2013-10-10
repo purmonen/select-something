@@ -6,7 +6,6 @@ app.controller('SelectionCtrl', function($scope, $timeout) {
 	$scope.selected = [];
 	$scope.element = '';
 	$scope.selectionSize = 0;
-	$scope.showNoSelection = true;
 	$scope.focus = true;
 	var allowSelect = true;
 
@@ -34,24 +33,14 @@ app.controller('SelectionCtrl', function($scope, $timeout) {
 		$scope.elements.splice(index, 1);
 	}
 
-	$scope.removeSelected = function(index) {
-		$scope.selected.splice(index, 1);
-
-		if (!$scope.selected.length) {
-			$scope.showNoSelection = true;
-		}
-	}
-
 	$scope.removeElements = function() {
 		$scope.elements = [];
 		$scope.selected = [];
-		$scope.showNoSelection = true;
 	}
 
 	$scope.selectElements = function() {
 		if (allowSelect) {
 			allowSelect = false;
-			$scope.showNoSelection = false;
 			$scope.selected = [];
 			select([]);
 		}
@@ -72,7 +61,7 @@ app.controller('SelectionCtrl', function($scope, $timeout) {
 			e = $('#select-from').children().eq(random);
 			e.animate({
 				position: 'absolute',
-				left: '107%'
+				left: '108%'
 			}, timeout);
 
 			$timeout(function() {

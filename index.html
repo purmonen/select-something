@@ -27,12 +27,12 @@
 	<div class="col-md-6 col-sm-6 col-lg-6">
 		<form role="form" class="form-inline">
 			<div class="form-group">
-				<input ng-model="element" class="form-control" ng-focus="{{ focus }}">			
+				<input ng-model="element" class="form-control" autofocus>			
 			</div>
 			<button id="add-element-button" type="submit" class="btn btn-default"
 				ng-click="addElement()">
 				<span class="glyphicon glyphicon-plus"></span> Add</button>
-			<button ng-click="removeElements()" class="btn btn-danger">
+			<button ng-click="removeElements()" ng-show="elements.length || selected.length" class="btn btn-danger">
 				<span class="glyphicon glyphicon-minus"></span> Clear</button>
 		</form>
 	</div>
@@ -69,7 +69,6 @@
 			<ul class="list-group">
 				<li class="element-div list-group-item" ng-repeat="element in selected">
 					<span style="color: {{ element.color }}; font-family: fantasy; font-size: 24px">{{ element.value }}</span>
-					<button role="button" class="close" ng-click="removeSelected(i)">&times;</button>
 				</li>
 			</ul>
 		</div>	
