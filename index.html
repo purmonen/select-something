@@ -56,7 +56,7 @@
 			<div class="panel-heading">Select from</div>
 			<ul class="list-group" id="select-from">
 				<li class="list-group-item" ng-repeat="(i, element) in elements">
-					<span style="color: {{ element.color }}; font-family: fantasy; font-size: 24px">{{ element.value }} <small ng-show="element.count"> ({{ element.count }})</small></span>
+					<span style="color: {{ element.color }}; font-size: 24px">{{ element.value }} <small ng-show="element.count"> ({{ element.count }})</small></span>
 					<button role="button pull-right" class="close" ng-click="removeElement(i)">&times;</button>
 				</li>
 			</ul>
@@ -68,7 +68,7 @@
 			<div class="panel-heading">Selected</div>
 			<ul class="list-group">
 				<li class="element-div list-group-item" ng-repeat="element in selected">
-					<span style="color: {{ element.color }}; font-family: fantasy; font-size: 24px">{{ element.value }}</span>
+					<span style="color: {{ element.color }}; font-size: 24px">{{ element.value }}</span>
 				</li>
 			</ul>
 		</div>	
