@@ -1,10 +1,11 @@
 var app = angular.module('app', []);
 
 app.controller('SelectionCtrl', function($scope, $timeout) {
-	$scope.elements = [{value: 'a', count: 0}, {value: 'b', count: 0}, {value: 'c', count: 0}];
+	$scope.elements = [];
+	// $scope.elements = [{value: 'a', count: 0}, {value: 'b', count: 0}, {value: 'c', count: 0}];
 	$scope.selected = [];
 	$scope.element = '';
-	$scope.selectionSize = 2;
+	$scope.selectionSize = 0;
 	$scope.showNoSelection = true;
 	$scope.focus = true;
 	var allowSelect = true;
