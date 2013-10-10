@@ -1,10 +1,10 @@
 var app = angular.module('app', []);
 
 app.controller('SelectionCtrl', function($scope, $timeout) {
-	$scope.elements = [];
+	$scope.elements = [{value: 'a', count: 0}, {value: 'b', count: 0}, {value: 'c', count: 0}];
 	$scope.selected = [];
 	$scope.element = '';
-	$scope.selectionSize = 0;
+	$scope.selectionSize = 2;
 	$scope.showNoSelection = true;
 	$scope.focus = true;
 	var allowSelect = true;
@@ -14,7 +14,13 @@ app.controller('SelectionCtrl', function($scope, $timeout) {
 		$scope.element = '';
 
 		if (element) {
-			$scope.elements.push(element);
+			color = '#';
+			for (i = 0; i < 6; i++) {
+				color += (Math.floor(Math.random() * 15)).toString(16);
+			}
+
+			console.log(color);
+			$scope.elements.push({value: element, count: 0, color: color});
 		}
 
 		if ($scope.elements.length === 1) {
@@ -46,61 +52,50 @@ app.controller('SelectionCtrl', function($scope, $timeout) {
 			allowSelect = false;
 			$scope.showNoSelection = false;
 			$scope.selected = [];
-			highLight(10, $('#select-from').children(), 0, 150, function() {
-				select([]);
-			});
-		}
-	}
-
-	function highLight(count, children, last, timeout, func) {
-		if (count > 0) {
-			while (true) {
-				i = randomRange(0, $scope.elements.length - 1);
-				if (i != last) {
-					break;
-				}
-			}
-			console.log(i);
-			e = children.eq(i);
-			e.addClass('highlight');
-			count -= 1;
-			$timeout(function() {
-				e.removeClass('highlight');
-				highLight(count, children, i, timeout, func);
-			},  timeout);
-		} else {
-			func();
+			select([]);
 		}
 	}
 
 	function select(indexes) {
-		var timeout = 250;
+		var timeout = 300;
+		var random;
+		var i;
+		var e;
+
 		if (indexes.length < $scope.selectionSize) {
-			while (true) {
+			while (indexes.indexOf(random) !== -1 || random === undefined) {
+				console.log('loop');
 				random = randomRange(0, $scope.elements.length-1);
-				if (indexes.indexOf(random) === -1) {
-					indexes.push(random);
-					var e = $('#select-from').children().eq(random);
-					e.addClass('highlight')
-					e.animate({
-						position: 'absolute',
-						left: '100%',
-						opacity: 0.8,
-					}, timeout).animate({
-						left: '0',
-						opacity: 1
-					}, 0, function() {
-						e.removeClass('highlight');
-					});
-					break;
-				}
 			}
+			indexes.push(random);
+			e = $('#select-from').children().eq(random);
+			e.animate({
+				position: 'absolute',
+				left: '107%'
+			}, timeout);
+
 			$timeout(function() {
-				$scope.selected.push($scope.elements[indexes[indexes.length-1]]);
 				select(indexes);
 			}, timeout);
 		} else {
-			allowSelect = true;
+			$timeout(function() {
+				allowSelect = true;
+				for (i = 0; i < indexes.length; i++) {
+					element = $scope.elements[indexes[i]];
+					element.count += 1;
+					$scope.selected.push(element);
+					e = $('#select-from').children().eq(indexes[i]);
+					e.css({left: '0'});
+				}
+				$scope.elements.sort(function(x,y) {
+					if (x.count > y.count) {
+						return -1;
+					} else if (x.count < y.count) {
+						return 1;
+					}
+					return 0;
+				});
+			}, timeout);
 		}
 	}
 

@@ -5,14 +5,13 @@
 	<meta name="viewport" content="width=device-width, initial-scale=1.0">
 	<title>Select</title>
 	<link rel="stylesheet" href="http://netdna.bootstrapcdn.com/bootstrap/3.0.0/css/bootstrap.min.css">
-	<link rel="stylesheet" href="style.css">
 	<script src="http://code.jquery.com/jquery-1.10.2.min.js"></script>
     <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.0.8/angular.min.js"></script>
 	<script src="selection.js"></script>
 </head>
 <body ng-controller="SelectionCtrl" ng-app="app">
-<div class="container">
-	<ol class="breadcrumb">
+<div class="container" style="width: 750px;">
+	<ol class="breadcrumb" style="background: none">
 		<li><a href="http://www.kth.se">KTH</a></li>
 		<li><a href="http://www.nada.kth.se/~purmonen/">Sami Purmonen</a></li>
 		<li class="active">Select</li>
@@ -57,10 +56,9 @@
 			<div class="panel-heading">Select from</div>
 			<ul class="list-group" id="select-from">
 				<li class="list-group-item" ng-repeat="(i, element) in elements">
-					<span>{{ element }}</span>
-					<button role="button" class="close" ng-click="removeElement(i)">&times;</button>
+					<span style="color: {{ element.color }}; font-family: fantasy; font-size: 24px">{{ element.value }} <small ng-show="element.count"> ({{ element.count }})</small></span>
+					<button role="button pull-right" class="close" ng-click="removeElement(i)">&times;</button>
 				</li>
-				<li class="list-group-item" ng-hide="elements.length">No elements</li>
 			</ul>
 		</div>
 	</div>
@@ -70,10 +68,9 @@
 			<div class="panel-heading">Selected</div>
 			<ul class="list-group">
 				<li class="element-div list-group-item" ng-repeat="element in selected">
-					<span>{{ element }}</span>
+					<span style="color: {{ element.color }}; font-family: fantasy; font-size: 24px">{{ element.value }}</span>
 					<button role="button" class="close" ng-click="removeSelected(i)">&times;</button>
 				</li>
-				<li class="list-group-item" ng-show="showNoSelection">No elements</li>
 			</ul>
 		</div>	
 	</div>
